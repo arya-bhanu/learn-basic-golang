@@ -8,5 +8,5 @@ import (
 
 func main() {
 	fmt.Println("Hello world")
-	fmt.Println(quote.Go())
+	fmt.Println(quote.Hello())
 }
