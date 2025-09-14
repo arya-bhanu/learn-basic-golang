@@ -4,10 +4,12 @@ import (
 	"fmt"
 	"math/rand"
 	"runtime"
+	"sync"
 	"time"
 )
 
 func main() {
+	var wg sync.WaitGroup
 	runtime.GOMAXPROCS(2)
 	greetingsChan := make(chan string, 1)
 	letterLengthChan := make(chan int)
@@ -43,7 +45,9 @@ func main() {
 	// 	}
 	// }
 
+	wg.Add(1)
 	go func() {
+		defer wg.Done()
 		for greet := range greetingsChan {
 			fmt.Println(greet)
 		}
@@ -64,7 +68,8 @@ func main() {
 		}
 	}
 
-	fmt.Scanln()
+	wg.Wait()
+
 }
 
 func sendMessage(strChan chan<- string, from string) {
