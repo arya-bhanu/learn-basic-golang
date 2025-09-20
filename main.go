@@ -2,11 +2,16 @@ package main
 
 import (
 	"fmt"
-
-	"rsc.io/quote"
+	"time"
 )
 
 func main() {
-	fmt.Println("Hello world")
-	fmt.Println(quote.Hello())
+	start := time.Now()
+	generateFiles()
+	duration := time.Since(start)
+	fmt.Printf("generate files done in: %v\n", duration)
+	start = time.Now()
+	proceedSync()
+	duration = time.Since(start)
+	fmt.Printf("renaming files done in: %v\n", duration)
 }
