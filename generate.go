@@ -12,8 +12,8 @@ import (
 	"github.com/joho/godotenv"
 )
 
-const totalFile = 3000
-const contentLength = 5000
+const totalFile = 50000
+const contentLength = 100000
 
 var (
 	tempPath string
