@@ -11,7 +11,7 @@ func main() {
 	duration := time.Since(start)
 	fmt.Printf("generate files done in: %v\n", duration)
 	start = time.Now()
-	proceedAsync()
+	ProceedAsync()
 	// proceedSync()
 	duration = time.Since(start)
 	fmt.Printf("renaming files done in: %v\n", duration)

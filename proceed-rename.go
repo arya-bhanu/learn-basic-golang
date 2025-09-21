@@ -19,7 +19,7 @@ type FileInfo struct {
 	hex  string
 }
 
-func proceedSync() {
+func ProceedSync() {
 	counterTotalFound := 0
 	counterTotalRenamed := 0
 	// loop the path
@@ -68,7 +68,7 @@ func proceedSync() {
 	fmt.Printf("Total file renamed: %d\n", counterTotalRenamed)
 }
 
-func proceedAsync() {
+func ProceedAsync() {
 	readChan := make(chan FileInfo)
 	go func() {
 		err := filepath.Walk(tempPath, func(path string, info os.FileInfo, err error) error {
