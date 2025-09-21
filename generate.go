@@ -114,13 +114,11 @@ func writeFileWorker(inChan <-chan GeneratedFile, totalFileCreated *int, wg *syn
 		defer wg.Done()
 		for val := range inChan {
 			mu.Lock()
-			currVal := *totalFileCreated
 			err := os.WriteFile(val.filename, []byte(val.content), os.ModePerm)
-			currVal++
-			*totalFileCreated = currVal
 			if err != nil {
 				fmt.Println("Error writing file", val.filename)
 			}
+			*totalFileCreated++
 			mu.Unlock()
 		}
 	}()
