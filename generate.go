@@ -28,7 +28,7 @@ func init() {
 	tempPath = filepath.Join(os.Getenv("TEMP"), "pipeline-generated")
 }
 
-func generateFiles() {
+func GenerateFiles() {
 	err := os.RemoveAll(tempPath)
 	if err != nil {
 		fmt.Printf("Error remove all path: %s", err.Error())
@@ -39,7 +39,7 @@ func generateFiles() {
 	}
 	for t := range totalFile {
 		filename := path.Join(tempPath, fmt.Sprintf("file-%d-sample.txt", t))
-		content := randomString(contentLength)
+		content := RandomString(contentLength)
 		err := os.WriteFile(filename, []byte(content), os.ModePerm)
 		if err != nil {
 			fmt.Println("Error writing file", filename)
@@ -51,7 +51,7 @@ func generateFiles() {
 	fmt.Printf("Total files created: %d\n", totalFile)
 }
 
-func randomString(length int) string {
+func RandomString(length int) string {
 	letters := []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 	b := make([]rune, length)
 	for i := range b {
