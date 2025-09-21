@@ -69,7 +69,7 @@ func proceedSync() {
 }
 
 func proceedAsync() {
-	readChan := make(chan FileInfo)
+	readChan := make(chan FileInfo, 10)
 	go func() {
 		err := filepath.Walk(tempPath, func(path string, info os.FileInfo, err error) error {
 			if err != nil {
@@ -136,7 +136,7 @@ func renameFile(chanIn <-chan FileInfo, wg *sync.WaitGroup) {
 }
 
 func getMD5Sum(chanIn <-chan FileInfo) <-chan FileInfo {
-	chanString := make(chan FileInfo)
+	chanString := make(chan FileInfo, 10)
 
 	go func() {
 		defer close(chanString)
@@ -151,7 +151,7 @@ func getMD5Sum(chanIn <-chan FileInfo) <-chan FileInfo {
 }
 
 func mergeMD5SumChanel(currents ...<-chan FileInfo) <-chan FileInfo {
-	mainRiverChanel := make(chan FileInfo)
+	mainRiverChanel := make(chan FileInfo, 10)
 	for _, channel := range currents {
 		wg.Add(1)
 		go func(x <-chan FileInfo) {
